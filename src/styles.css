@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200;300;400;500;600;700;800&family=Pacifico&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .item {
+    @apply rounded-full absolute shadow-outerShadow cursor-pointer;
+  }
+  .icon-holder {
+    @apply w-40 aspect-square rounded-full grid place-content-center border-[16px] bg-white shadow-innerShadow;
+  }
+}
