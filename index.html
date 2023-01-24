@@ -4,37 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- displays site properly based on user's device -->
-
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
-    <link rel="stylesheet" href="./public/styles.css" />
     <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="./public/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/f1c1c1e611.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./public/index.js" defer></script>
   </head>
   <body class="font-pacifico">
+    <!-- main section -->
     <main
-      class="h-screen bg-gradient-to-t from-background-from to-background-to flex justify-center items-center"
+      class="w-full h-screen bg-gradient-to-t from-background-from to-background-to p-10 relative select-none"
     >
       <section class="game">
         <header
           id="game-header"
-          class="w-[650px] p-6 border-2 border-neutral-headerOutline rounded-xl flex justify-between items-center"
+          class="w-[650px] max-w-full mx-auto p-6 border-[3px] border-neutral-headerOutline rounded-xl flex justify-between items-center"
         >
           <div class="game-logo">
-            <img src="./images/logo.svg" alt="game-logo" />
+            <img
+              src="./images/logo.svg"
+              alt="game-logo"
+              class="w-24 md:w-auto"
+            />
           </div>
           <div
             class="score-container bg-white rounded-xl py-2 px-8 text-center"
           >
             <p
-              class="uppercase tracking-wider text-neutral-scoreText font-semibold"
+              class="uppercase tracking-widest text-neutral-scoreText font-semibold"
             >
               score
             </p>
-            <span class="score-value text-6xl font-bold text-neutral-darkText"
+            <span
+              class="score-value text-4xl md:text-6xl font-bold text-neutral-darkText"
               >12</span
             >
           </div>
@@ -43,28 +53,72 @@
           <img
             src="./images/bg-triangle.svg"
             alt="background-triangle"
-            class="w-44 mx-auto"
+            class="w-44 mx-auto flex-shrink-0"
           />
-          <div class="item shadow-primary-paperTo/60 -top-1/2 left-[20%]">
+          <div
+            class="item group shadow-primary-paperTo/60 -top-1/2 left-1/2 -translate-x-[120%]"
+          >
             <span class="icon-holder border-primary-paperTo">
-              <img src="./images/icon-paper.svg" alt="paper icon" />
-            </span>
-          </div>
-          <div class="item shadow-primary-scissorsFrom/60 -top-1/2 right-[20%]">
-            <span class="icon-holder border-primary-scissorsTo">
-              <img src="./images/icon-scissors.svg" alt="scissors icon" />
+              <img
+                src="./images/icon-paper.svg"
+                alt="paper icon"
+                class="group-hover:-rotate-12 transition-transform"
+              />
             </span>
           </div>
           <div
-            class="item shadow-primary-rockTo/60 top-1/2 left-1/2 -translate-x-1/2"
+            class="item group shadow-primary-scissorsFrom/60 -top-1/2 left-1/2 translate-x-[20%]"
+          >
+            <span class="icon-holder border-primary-scissorsTo">
+              <img
+                src="./images/icon-scissors.svg"
+                alt="scissors icon"
+                class="group-hover:-rotate-12 transition-transform"
+              />
+            </span>
+          </div>
+          <div
+            class="item group shadow-primary-rockTo/60 top-1/2 left-1/2 -translate-x-1/2"
           >
             <span class="icon-holder border-primary-rockTo">
-              <img src="./images/icon-rock.svg" alt="rock icon" />
+              <img
+                src="./images/icon-rock.svg"
+                alt="rock icon"
+                class="group-hover:-rotate-12 transition-transform"
+              />
             </span>
           </div>
         </section>
       </section>
+      <button
+        id="rules-btn"
+        class="absolute bottom-10 right-1/2 translate-x-1/2 md:right-10 md:-translate-x-0 border-2 rounded-lg border-neutral-headerOutline py-2 px-10 text-white uppercase tracking-widest hover:bg-neutral-headerOutline transition-colors duration-200"
+      >
+        Rules
+      </button>
+      <section
+        id="rules-section"
+        class="rules-section absolute top-0 left-0 bg-black/40 w-screen h-screen justify-center items-center hidden"
+      >
+        <div class="rules-container bg-white rounded-lg p-8">
+          <div
+            class="heading mb-6 pb-4 border-b-2 border-gray-300 flex justify-between items-center"
+          >
+            <h1 class="uppercase text-neutral-darkText text-3xl font-bold">
+              Rules
+            </h1>
+            <button
+              id="close-rules-btn"
+              class="text-gray-400 hover:text-neutral-darkText text-2xl transition-colors duration-200"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <img src="./images/image-rules.svg" alt="rules-image" />
+        </div>
+      </section>
     </main>
+    <!-- footer -->
     <footer class="text-white absolute bottom-0 left-0 w-full text-center">
       <div class="">
         Challenge by

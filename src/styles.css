@@ -5,9 +5,12 @@
 
 @layer components {
   .item {
-    @apply rounded-full absolute shadow-outerShadow cursor-pointer;
+    @apply rounded-full absolute shadow-outerShadow cursor-pointer hover:scale-105 transition-transform duration-200;
   }
   .icon-holder {
-    @apply w-40 aspect-square rounded-full grid place-content-center border-[16px] bg-white shadow-innerShadow;
+    @apply w-36 md:w-40 aspect-square rounded-full grid place-content-center border-[16px] bg-white shadow-innerShadow;
+  }
+  .rules-section.active {
+    @apply flex;
   }
 }
