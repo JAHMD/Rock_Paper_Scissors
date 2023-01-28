@@ -22,7 +22,7 @@
   .selected-item-title {
     @apply font-semibold text-xl tracking-widest uppercase absolute -top-1/2 left-1/2 -translate-x-1/2 text-white whitespace-nowrap;
   }
-  .winner {
+  .selected-item-holder.winner {
     box-shadow: 0 0 0 30px hsl(217deg 16% 45% / 30%),
       0 0 0 60px hsl(217deg 16% 45% / 20%), 0 0 0 90px hsl(217deg 16% 45% / 10%);
   }

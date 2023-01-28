@@ -12,16 +12,16 @@
     />
     <title>Frontend Mentor | Rock, Paper, Scissors</title>
     <link rel="stylesheet" href="./public/styles.css" />
-    <script
+    <!-- <script
       src="https://kit.fontawesome.com/f1c1c1e611.js"
       crossorigin="anonymous"
-    ></script>
+    ></script> -->
     <script src="./public/index.js" defer></script>
   </head>
-  <body class="font-pacifico">
+  <body class="font-pacifico relative">
     <!-- main section -->
     <main
-      class="w-full h-screen bg-gradient-to-t from-background-from to-background-to p-10 relative select-none"
+      class="w-full min-h-screen p-10 bg-gradient-to-t from-background-from to-background-to relative select-none"
     >
       <section class="game">
         <header
@@ -94,21 +94,24 @@
         </section>
         <section
           id="result-section"
-          class="result-section mt-32 justify-center items-center gap-24 hidden"
+          class="result-section mt-32 justify-center items-center flex-wrap gap-24 hidden"
         >
           <div class="selected-item-holder">
             <h2 class="selected-item-title">You picked</h2>
           </div>
-          <div id="result" class="w-60 hidden">
-            <h2 class="font-bold uppercase text-white text-6xl">You lose</h2>
+          <div id="result-container" class="w-full md:w-60 order-last hidden">
+            <h2
+              class="font-bold uppercase text-white text-6xl text-center"
+              data-result
+            ></h2>
             <button
-              id="again-btn"
+              data-again-btn
               class="block mt-6 mx-auto py-4 px-10 rounded-lg text-xl font-semibold tracking-widest text-neutral-darkText hover:text-red-500 bg-white shadow shadow-white/30 transition-colors duration-200"
             >
               Play again
             </button>
           </div>
-          <div class="selected-item-holder">
+          <div class="selected-item-holder md:order-last">
             <h2 class="selected-item-title">The house picked</h2>
           </div>
         </section>
@@ -144,7 +147,7 @@
       </section>
     </main>
     <!-- footer -->
-    <footer class="text-white absolute bottom-0 left-0 w-full text-center">
+    <footer class="absolute bottom-0 left-0 w-full text-white text-center">
       <div class="">
         Challenge by
         <a

@@ -1,0 +1,5 @@
+- score value
+- click outside the rules to close
+- fix the mobile view
+- try to add some animations
+- refoctor you code
