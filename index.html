@@ -45,7 +45,8 @@
             </p>
             <span
               class="score-value text-4xl md:text-6xl font-bold text-neutral-darkText"
-              >12</span
+              data-score-value
+              >0</span
             >
           </div>
         </header>
@@ -56,7 +57,7 @@
             class="w-44 mx-auto flex-shrink-0"
           />
           <div
-            class="game-item item absolute group shadow-primary-paperTo/60 -top-1/2 left-1/2 -translate-x-[120%]"
+            class="game-item item group shadow-primary-paperTo/60 -top-1/2 left-1/2 -translate-x-[120%]"
             data-item="paper"
           >
             <span class="icon-holder border-primary-paperTo">
@@ -68,7 +69,7 @@
             </span>
           </div>
           <div
-            class="game-item item absolute group shadow-primary-scissorsTo/60 -top-1/2 left-1/2 translate-x-[20%]"
+            class="game-item item group shadow-primary-scissorsTo/60 -top-1/2 left-1/2 translate-x-[20%]"
             data-item="scissors"
           >
             <span class="icon-holder border-primary-scissorsTo">
@@ -80,7 +81,7 @@
             </span>
           </div>
           <div
-            class="game-item item absolute group shadow-primary-rockTo/60 top-1/2 left-1/2 -translate-x-1/2"
+            class="game-item item group shadow-primary-rockTo/60 top-1/2 left-1/2 -translate-x-1/2"
             data-item="rock"
           >
             <span class="icon-holder border-primary-rockTo">
@@ -94,12 +95,12 @@
         </section>
         <section
           id="result-section"
-          class="result-section mt-32 justify-center items-center flex-wrap gap-24 hidden"
+          class="result-section mt-32 justify-center items-center flex-wrap gap-8 md:gap-24 hidden"
         >
           <div class="selected-item-holder">
             <h2 class="selected-item-title">You picked</h2>
           </div>
-          <div id="result-container" class="w-full md:w-60 order-last hidden">
+          <div id="result-container" class="w-full lg:w-60 order-last hidden">
             <h2
               class="font-bold uppercase text-white text-6xl text-center"
               data-result
@@ -111,7 +112,7 @@
               Play again
             </button>
           </div>
-          <div class="selected-item-holder md:order-last">
+          <div class="selected-item-holder lg:order-last">
             <h2 class="selected-item-title">The house picked</h2>
           </div>
         </section>
@@ -128,18 +129,22 @@
         id="rules-section"
         class="rules-section absolute top-0 left-0 bg-black/40 w-screen h-screen justify-center items-center hidden"
       >
-        <div class="rules-container bg-white rounded-lg p-8">
-          <div
-            class="heading mb-6 pb-3 border-b-2 border-gray-300 flex justify-between items-center"
-          >
-            <h1 class="uppercase text-neutral-darkText text-3xl font-bold">
+        <div
+          class="rules-container w-full h-full flex justify-center flex-col sm:w-auto sm:h-auto bg-white rounded-lg p-8"
+        >
+          <div class="heading mb-6 sm:flex sm:justify-between sm:items-center">
+            <h1
+              class="uppercase text-center sm:text-start text-neutral-darkText text-3xl font-bold"
+            >
               Rules
             </h1>
             <button
               id="close-rules-btn"
-              class="text-gray-400 hover:text-neutral-darkText text-2xl transition-colors duration-200"
+              class="absolute bottom-12 left-1/2 -translate-x-1/2 sm:relative sm:bottom-0 sm:left-0 sm:-translate-x-0 text-gray-400 hover:text-neutral-darkText text-2xl transition-colors duration-200"
+              data-close-btn
             >
-              <i class="fa-solid fa-xmark"></i>
+              <!-- <i class="fa-solid fa-xmark"></i> -->
+              <img src="./images/icon-close.svg" alt="" />
             </button>
           </div>
           <img src="./images/image-rules.svg" alt="rules-image" />
@@ -147,7 +152,7 @@
       </section>
     </main>
     <!-- footer -->
-    <footer class="absolute bottom-0 left-0 w-full text-white text-center">
+    <!-- <footer class="absolute bottom-0 left-0 w-full text-white text-center">
       <div class="">
         Challenge by
         <a
@@ -163,6 +168,6 @@
           >Ahmed Wael</a
         >.
       </div>
-    </footer>
+    </footer> -->
   </body>
 </html>

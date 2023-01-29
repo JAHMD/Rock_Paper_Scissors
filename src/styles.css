@@ -1,23 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@100;200;300;400;500;600;700;800&family=Pacifico&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
   .item {
-    @apply rounded-full shadow-outerShadow;
+    @apply absolute rounded-full shadow-outerShadow;
   }
   .game-item {
     @apply hover:scale-105 transition-transform duration-200 cursor-pointer;
   }
-  .result-section.active {
+  .result-section.active,
+  .rules-section.active {
     @apply flex;
   }
-  .result-item {
-    @apply left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2;
-  }
+  /* .result-item {
+    @apply absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2;
+  } */
   .selected-item-holder {
-    @apply relative bg-black/20 w-40 aspect-square rounded-full;
+    @apply relative bg-black/20 w-32 md:w-40 aspect-square rounded-full;
   }
   .selected-item-title {
     @apply font-semibold text-xl tracking-widest uppercase absolute -top-1/2 left-1/2 -translate-x-1/2 text-white whitespace-nowrap;
@@ -27,9 +29,6 @@
       0 0 0 60px hsl(217deg 16% 45% / 20%), 0 0 0 90px hsl(217deg 16% 45% / 10%);
   }
   .icon-holder {
-    @apply w-36 md:w-40 aspect-square rounded-full grid place-content-center border-[16px] bg-white shadow-innerShadow;
-  }
-  .rules-section.active {
-    @apply flex;
+    @apply w-32 md:w-40 aspect-square rounded-full grid place-content-center border-[16px] bg-white shadow-innerShadow;
   }
 }

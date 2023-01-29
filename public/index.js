@@ -1,3 +1,4 @@
+const scoreValElem = document.querySelector("[data-score-value]");
 const gameContainer = document.getElementById("game-container");
 const gameItems = document.querySelectorAll(".game-item");
 // result
@@ -9,21 +10,24 @@ const againBtn = document.querySelector("[data-again-btn]");
 const rulesSection = document.getElementById("rules-section");
 const rulesBtn = document.getElementById("rules-btn");
 const closeRulesBtn = document.getElementById("close-rules-btn");
+let score = 0;
 
 // open rules section
-rulesBtn.addEventListener("click", rulesSectionHandler);
+rulesBtn.addEventListener("click", () => {
+  rulesSection.classList.add("active");
+});
 // close rules section
-closeRulesBtn.addEventListener("click", rulesSectionHandler);
+document.addEventListener("click", (e) => {
+  const closestToBtn = e.target.closest("[data-close-btn]");
+  if (closestToBtn === closeRulesBtn || e.target === rulesSection)
+    rulesSection.classList.remove("active");
+});
 
 startTheGame();
 
 againBtn.addEventListener("click", restartTheGame);
 
 // functions section -----------------------------------------------
-function rulesSectionHandler() {
-  rulesSection.classList.toggle("active");
-}
-
 function startTheGame() {
   gameItems.forEach((item) => {
     item.addEventListener("click", () => {
@@ -48,7 +52,7 @@ function getSelectedItems() {
 function resultSectionHandler(selectedItems = {}) {
   selectedItemHolders.forEach((holder, i) => {
     holder.innerHTML += `
-    <div class="result-item item absolute shadow-primary-${selectedItems[i]}To/60">
+    <div class="item result-item shadow-primary-${selectedItems[i]}To/60">
       <span class="icon-holder border-primary-${selectedItems[i]}To">
         <img src="./images/icon-${selectedItems[i]}.svg" alt="${selectedItems[i]} icon" />
       </span>
@@ -57,7 +61,17 @@ function resultSectionHandler(selectedItems = {}) {
 }
 
 function getRandomItem() {
-  const items = ["paper", "scissors", "rock"];
+  const items = [
+    "paper",
+    "scissors",
+    "rock",
+    "paper",
+    "scissors",
+    "rock",
+    "paper",
+    "scissors",
+    "rock",
+  ];
   let j = Math.floor(Math.random() * items.length);
   return items[j];
 }
@@ -71,12 +85,12 @@ function getResult(selectedItems = {}) {
   const mySelection = selectedItems[0][0];
   const theOtherSelection = selectedItems[1][0];
   if (mySelection === theOtherSelection) return `d`;
-  // if (mySelection === "s" && theOtherSelection === "p") return true;
-  // else if (mySelection === "r" && theOtherSelection === "s") return true;
-  // else if (mySelection === "p" && theOtherSelection === "r") return true;
-  // else return false;
   for (let [key, val] of Object.entries(rules)) {
-    if (key === mySelection && val === theOtherSelection) return true;
+    if (key === mySelection && val === theOtherSelection) {
+      score++;
+      scoreValElem.textContent = score;
+      return true;
+    }
   }
   return false;
 }
