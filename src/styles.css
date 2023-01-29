@@ -11,15 +11,18 @@
   .game-item {
     @apply hover:scale-105 transition-transform duration-200 cursor-pointer;
   }
+  .game-container.hide {
+    @apply opacity-0;
+  }
   .result-section.active,
   .rules-section.active {
-    @apply flex;
+    @apply flex opacity-100 transition duration-200;
   }
-  /* .result-item {
-    @apply absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2;
-  } */
+  .result-container.active {
+    @apply opacity-100;
+  }
   .selected-item-holder {
-    @apply relative bg-black/20 w-32 md:w-40 aspect-square rounded-full;
+    @apply relative bg-black/20 w-32 md:w-40 aspect-square rounded-full transition duration-300;
   }
   .selected-item-title {
     @apply font-semibold text-xl tracking-widest uppercase absolute -top-1/2 left-1/2 -translate-x-1/2 text-white whitespace-nowrap;

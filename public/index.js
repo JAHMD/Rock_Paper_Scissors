@@ -1,38 +1,46 @@
-const scoreValElem = document.querySelector("[data-score-value]");
-const gameContainer = document.getElementById("game-container");
+const gameContainer = document.querySelector("[data-game-container]");
 const gameItems = document.querySelectorAll(".game-item");
 // result
-const resultSection = document.getElementById("result-section");
-const selectedItemHolders = document.querySelectorAll(".selected-item-holder");
+const resultSection = document.querySelector("[data-result-section]");
+const selectedItemsHolders = document.querySelectorAll(".selected-item-holder");
 const resultContainer = document.getElementById("result-container");
 const againBtn = document.querySelector("[data-again-btn]");
-// rules
-const rulesSection = document.getElementById("rules-section");
-const rulesBtn = document.getElementById("rules-btn");
-const closeRulesBtn = document.getElementById("close-rules-btn");
-let score = 0;
-
-// open rules section
-rulesBtn.addEventListener("click", () => {
-  rulesSection.classList.add("active");
-});
-// close rules section
-document.addEventListener("click", (e) => {
-  const closestToBtn = e.target.closest("[data-close-btn]");
-  if (closestToBtn === closeRulesBtn || e.target === rulesSection)
-    rulesSection.classList.remove("active");
-});
 
 startTheGame();
 
-againBtn.addEventListener("click", restartTheGame);
+restartTheGame();
 
 // functions section -----------------------------------------------
+(function rulesSectionHandler() {
+  const rulesSecElem = document.getElementById("rules-section");
+  const rulesBtn = document.getElementById("rules-btn");
+  const closeRulesBtn = document.getElementById("close-rules-btn");
+
+  document.addEventListener("click", (e) => {
+    const closestToXBtn = e.target.closest("[data-close-btn]");
+    if (e.target === rulesBtn) {
+      rulesSecElem.classList.remove("hidden");
+      setTimeout(() => {
+        rulesSecElem.classList.add("active");
+      }, 150);
+      return;
+    }
+    if (closestToXBtn === closeRulesBtn || e.target === rulesSecElem)
+      rulesSecElem.classList.remove("active");
+    setTimeout(() => {
+      rulesSecElem.classList.add("hidden");
+    }, 200);
+  });
+})();
+
 function startTheGame() {
   gameItems.forEach((item) => {
     item.addEventListener("click", () => {
-      gameContainer.style.display = "none";
-      resultSection.classList.add("active");
+      gameContainer.classList.add("hidden", "hide");
+      resultSection.classList.remove("hidden");
+      setTimeout(() => {
+        resultSection.classList.add("active");
+      }, 100);
       getSelectedItems.bind(item)();
     });
   });
@@ -40,21 +48,23 @@ function startTheGame() {
 
 function getSelectedItems() {
   const selectedItemsObj = {};
-  const mySelection = this.dataset.item;
-  selectedItemsObj[0] = mySelection;
-  selectedItemsObj[1] = getRandomItem();
-  resultSectionHandler(selectedItemsObj);
+  const mySelectedItem = this.dataset.item;
+  selectedItemsObj.me = mySelectedItem;
+  selectedItemsObj.random = getRandomItem();
+
+  selectedItemsHandler(selectedItemsObj);
   setTimeout(() => {
-    showResult(getResult(selectedItemsObj));
+    showResult(getResultState(selectedItemsObj));
   }, 500);
 }
 
-function resultSectionHandler(selectedItems = {}) {
-  selectedItemHolders.forEach((holder, i) => {
+function selectedItemsHandler({ me, random }) {
+  let slcItemsArr = [me, random];
+  selectedItemsHolders.forEach((holder, i) => {
     holder.innerHTML += `
-    <div class="item result-item shadow-primary-${selectedItems[i]}To/60">
-      <span class="icon-holder border-primary-${selectedItems[i]}To">
-        <img src="./images/icon-${selectedItems[i]}.svg" alt="${selectedItems[i]} icon" />
+    <div class="item result-item z-10 shadow-primary-${slcItemsArr[i]}To/60">
+      <span class="icon-holder border-primary-${slcItemsArr[i]}To">
+        <img src="./images/icon-${slcItemsArr[i]}.svg" alt="${slcItemsArr[i]} icon" />
       </span>
     </div>`;
   });
@@ -76,19 +86,17 @@ function getRandomItem() {
   return items[j];
 }
 
-function getResult(selectedItems = {}) {
+function getResultState({ me, random }) {
+  const scoreValElem = document.querySelector("[data-score-value]");
   const rules = {
     s: "p",
     p: "r",
     r: "s",
   };
-  const mySelection = selectedItems[0][0];
-  const theOtherSelection = selectedItems[1][0];
-  if (mySelection === theOtherSelection) return `d`;
+  if (me[0] === random[0]) return `d`;
   for (let [key, val] of Object.entries(rules)) {
-    if (key === mySelection && val === theOtherSelection) {
-      score++;
-      scoreValElem.textContent = score;
+    if (key === me[0] && val === random[0]) {
+      scoreValElem.textContent++;
       return true;
     }
   }
@@ -98,27 +106,39 @@ function getResult(selectedItems = {}) {
 function showResult(resultState) {
   const resultValue = document.querySelector("[data-result]");
   let value = "";
-  console.log(selectedItemHolders[1]);
   if (resultState === "d") value = `Draw`;
   else {
     if (resultState) {
       value = `You win`;
-      selectedItemHolders[0].classList.add("winner");
+      selectedItemsHolders[0].classList.add("winner");
     } else {
       value = `You lose`;
-      selectedItemHolders[1].classList.add("winner");
+      selectedItemsHolders[1].classList.add("winner");
     }
   }
   resultValue.textContent = value;
   resultContainer.classList.remove("hidden");
+  setTimeout(() => {
+    resultContainer.classList.add("active");
+  }, 100);
 }
-// !needs to be refactored
+
 function restartTheGame() {
-  selectedItemHolders.forEach((holder) => {
-    holder.classList.remove("winner");
-    holder.querySelector(".result-item")?.remove();
+  againBtn.addEventListener("click", () => {
+    selectedItemsHolders.forEach((holder) => {
+      holder.classList.remove("winner");
+      holder.querySelector(".result-item")?.remove();
+    });
+    hideElements(resultContainer);
+    hideElements(resultSection);
+    gameContainer.classList.remove("hidden");
+    setTimeout(() => {
+      gameContainer.classList.remove("hide");
+    }, 100);
   });
-  resultContainer.classList.add("hidden");
-  gameContainer.style.display = "block";
-  resultSection.classList.remove("active");
+}
+
+function hideElements(element) {
+  element.classList.add("hidden");
+  element.classList.remove("active");
 }
