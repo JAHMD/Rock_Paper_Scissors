@@ -1,3 +1,4 @@
+const scoreValElem = document.querySelector("[data-score-value]");
 const gameContainer = document.querySelector("[data-game-container]");
 const gameItems = document.querySelectorAll(".game-item");
 // result
@@ -5,6 +6,8 @@ const resultSection = document.querySelector("[data-result-section]");
 const selectedItemsHolders = document.querySelectorAll(".selected-item-holder");
 const resultContainer = document.getElementById("result-container");
 const againBtn = document.querySelector("[data-again-btn]");
+
+scoreValElem.textContent = sessionStorage.getItem("score") || 0;
 
 startTheGame();
 
@@ -87,7 +90,6 @@ function getRandomItem() {
 }
 
 function getResultState({ me, random }) {
-  const scoreValElem = document.querySelector("[data-score-value]");
   const rules = {
     s: "p",
     p: "r",
@@ -97,6 +99,7 @@ function getResultState({ me, random }) {
   for (let [key, val] of Object.entries(rules)) {
     if (key === me[0] && val === random[0]) {
       scoreValElem.textContent++;
+      sessionStorage.setItem("score", scoreValElem.textContent);
       return true;
     }
   }

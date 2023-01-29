@@ -6,4 +6,5 @@ Done -------------------------
 - refoctor you code
 
 Doing -------------------------
+- fix the readme file
 
