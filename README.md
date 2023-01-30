@@ -27,7 +27,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Solution]()
+- Solution URL: [Solution](https://www.frontendmentor.io/solutions/rock-paper-and-scissors-game-fD2Ey6uW7c)
 - Live Site URL: [Demo](https://jahmd.github.io/Rock_Paper_Scissors/)
 
 ### Built with
